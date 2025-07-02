@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Adopt Me Text Styler</title>
   <style>
     body {
@@ -26,14 +26,22 @@
       border: 2px solid #ffb3d9;
       border-radius: 8px;
       margin-bottom: 20px;
+      resize: vertical;
+      box-sizing: border-box;
     }
     .style-box {
       background: #fff;
       border: 2px solid #ffd6eb;
-      padding: 15px;
+      padding: 15px 50px 15px 15px;
       margin-bottom: 15px;
       border-radius: 10px;
       position: relative;
+      overflow-x: auto;
+      max-width: 100%;
+      word-break: break-word;
+      white-space: pre-wrap;
+      font-size: 20px;
+      min-height: 40px;
     }
     .copy-btn {
       position: absolute;
@@ -112,6 +120,11 @@
         s: '𝐬', t: '𝐭', u: '𝐮', v: '𝐯', w: '𝐰', x: '𝐱', y: '𝐲', z: '𝐳'
       },
       output4: {
+        a: '𝒶', b: '𝒷', c: '𝒸', d: '𝒹', e: 'ℯ', f: '𝒻', g: 'ℊ', h: '𝒽', i: '𝒾',
+        j: '𝒿', k: '𝓀', l: '𝓁', m: '𝓂', n: '𝓃', o: 'ℴ', p: '𝓅', q: '𝓆', r: '𝓇',
+        s: '𝓈', t: '𝓉', u: '𝓊', v: '𝓋', w: '𝓌', x: '𝓍', y: '𝓎', z: '𝓏'
+      },
+      output5: {
         a: 'Ａ', b: 'Ｂ', c: 'Ｃ', d: 'Ｄ', e: 'Ｅ', f: 'Ｆ', g: 'Ｇ', h: 'Ｈ', i: 'Ｉ',
         j: 'Ｊ', k: 'Ｋ', l: 'Ｌ', m: 'Ｍ', n: 'Ｎ', o: 'Ｏ', p: 'Ｐ', q: 'Ｑ', r: 'Ｒ',
         s: 'Ｓ', t: 'Ｔ', u: 'Ｕ', v: 'Ｖ', w: 'Ｗ', x: 'Ｘ', y: 'Ｙ', z: 'Ｚ'
