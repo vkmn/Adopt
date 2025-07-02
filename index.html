@@ -81,44 +81,62 @@
     <div id="output5"></div>
   </div>
 
-  <script>
-    const input = document.getElementById('inputText');
+<script>
+  const input = document.getElementById('inputText');
 
-    const styles = {
-      output1: {
-        a: 'α', b: 'в', c: 'c', d: 'ԁ', e: 'є', f: 'f', g: 'ɡ', h: 'h', i: 'ι',
-        j: 'j', k: 'κ', l: 'ℓ', m: 'm', n: 'η', o: 'σ', p: 'ρ', q: 'q', r: 'я',
-        s: 'ѕ', t: 'т', u: 'υ', v: 'ν', w: 'w', x: 'х', y: 'у', z: 'z'
-      },
-      output2: {
-        a: 'ᴀ', b: 'ʙ', c: 'ᴄ', d: 'ᴅ', e: 'ᴇ', f: 'ꜰ', g: 'ɢ', h: 'ʜ', i: 'ɪ',
-        j: 'ᴊ', k: 'ᴋ', l: 'ʟ', m: 'ᴍ', n: 'ɴ', o: 'ᴏ', p: 'ᴘ', q: 'ǫ', r: 'ʀ',
-        s: 'ꜱ', t: 'ᴛ', u: 'ᴜ', v: 'ᴠ', w: 'ᴡ', x: 'x', y: 'ʏ', z: 'ᴢ'
-      },
-      output5: {
-        a: 'Ａ', b: 'Ｂ', c: 'Ｃ', d: 'Ｄ', e: 'Ｅ', f: 'Ｆ', g: 'Ｇ', h: 'Ｈ', i: 'Ｉ',
-        j: 'Ｊ', k: 'Ｋ', l: 'Ｌ', m: 'Ｍ', n: 'Ｎ', o: 'Ｏ', p: 'Ｐ', q: 'Ｑ', r: 'Ｒ',
-        s: 'Ｓ', t: 'Ｔ', u: 'Ｕ', v: 'Ｖ', w: 'Ｗ', x: 'Ｘ', y: 'Ｙ', z: 'Ｚ'
-      }
-    };
-
-    function stylize(text, map) {
-      return text.split('').map(c => map[c.toLowerCase()] || c).join('');
+  const styles = {
+    output1: {
+      a: 'α', b: 'в', c: 'c', d: 'ԁ', e: 'є', f: 'f', g: 'ɡ', h: 'h', i: 'ι',
+      j: 'j', k: 'κ', l: 'ℓ', m: 'm', n: 'η', o: 'σ', p: 'ρ', q: 'q', r: 'я',
+      s: 'ѕ', t: 'т', u: 'υ', v: 'ν', w: 'w', x: 'х', y: 'у', z: 'z'
+    },
+    output2: {
+      a: 'ᴀ', b: 'ʙ', c: 'ᴄ', d: 'ᴅ', e: 'ᴇ', f: 'ꜰ', g: 'ɢ', h: 'ʜ', i: 'ɪ',
+      j: 'ᴊ', k: 'ᴋ', l: 'ʟ', m: 'ᴍ', n: 'ɴ', o: 'ᴏ', p: 'ᴘ', q: 'ǫ', r: 'ʀ',
+      s: 'ꜱ', t: 'ᴛ', u: 'ᴜ', v: 'ᴠ', w: 'ᴡ', x: 'x', y: 'ʏ', z: 'ᴢ'
+    },
+    output5: {
+      a: 'Ａ', b: 'Ｂ', c: 'Ｃ', d: 'Ｄ', e: 'Ｅ', f: 'Ｆ', g: 'Ｇ', h: 'Ｈ', i: 'Ｉ',
+      j: 'Ｊ', k: 'Ｋ', l: 'Ｌ', m: 'Ｍ', n: 'Ｎ', o: 'Ｏ', p: 'Ｐ', q: 'Ｑ', r: 'Ｒ',
+      s: 'Ｓ', t: 'Ｔ', u: 'Ｕ', v: 'Ｖ', w: 'Ｗ', x: 'Ｘ', y: 'Ｙ', z: 'Ｚ'
     }
+  };
 
-    input.addEventListener('input', () => {
-      const text = input.value;
-      for (const id in styles) {
-        document.getElementById(id).innerText = stylize(text, styles[id]);
-      }
-    });
+  function stylize(text, map) {
+    return text.split('').map(c => map[c.toLowerCase()] || c).join('');
+  }
 
-    function copyText(id) {
-      const content = document.getElementById(id).innerText;
-      navigator.clipboard.writeText(content).then(() => {
-        alert('Copied to clipboard!');
-      });
+  input.addEventListener('input', () => {
+    const text = input.value;
+    for (const id in styles) {
+      document.getElementById(id).innerText = stylize(text, styles[id]);
     }
-  </script>
+  });
+
+  function copyText(id) {
+    const content = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(content);
+    // No alert on copy
+  }
+
+  // Sonido click tecla
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+  input.addEventListener('keydown', () => {
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+
+    osc.type = 'square';
+    osc.frequency.setValueAtTime(1000, audioCtx.currentTime); // tono
+    gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime); // volumen bajo
+
+    osc.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.05);
+  });
+</script>
+
 </body>
 </html>
